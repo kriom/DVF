@@ -50,6 +50,10 @@ th {
   padding: 0.5rem;
 }
 
+.card-body .address {
+  font-size: 12px;
+}
+
 .btn-primary {
   background-color: #002C81;
   border-color: #002C81;

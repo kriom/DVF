@@ -32,7 +32,8 @@ Vue.component('boite-accordeon', {
 						</div>
 						<div class="media-body text-left ml-1">
 							<b>{{ formatterNombre(mutation.infos[0]['valeur_fonciere']) }} € / {{ mutation.infos[0]['nature_mutation'] }}</b><br>
-							<span>{{ mutation.infos[0]['date_mutation'] }}</span>
+							<span>{{ mutation.infos[0]['date_mutation'] }}</span><br>
+							<div class="address">{{ formatterNombre(mutation.infos[0]['adresse_numero']) }}{{ formatterNombre(mutation.infos[0]['adresse_suffixe']) }} {{ mutation.infos[0]['adresse_nom_voie'] }}</div>
 			 			</div>
 						<div v-if="vue.mutationIndex != index" class="ml-1 mr-1">
 							<i class="fas fa-sort-down fa-1x"></i>
@@ -639,7 +640,7 @@ function computeParcelle(mutationsSection, idParcelle) {
   var mutations = _.chain(mutationsParcelle)
   	.groupBy('id_mutation')
   	.map(function (rows, idMutation) {
-			var infos = [_.pick(rows[0], 'date_mutation', 'id_parcelle', 'nature_mutation', 'valeur_fonciere')]
+			var infos = [_.pick(rows[0], 'date_mutation', 'id_parcelle', 'nature_mutation', 'valeur_fonciere', 'adresse_numero', 'adresse_suffixe', 'adresse_nom_voie')]
 
 			var parcellesLiees = _.uniq(
 				mutationsSection
