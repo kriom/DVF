@@ -680,3 +680,40 @@ function computeParcelle(mutationsSection, idParcelle) {
 
 	return {mutations: mutations}
 }
+
+var State = {
+    save: function() {
+        var storage = {}; var select_ids = ["departements", "communes", "sections", "parcelles", "daterange"]; for(var i in select_ids) {
+            var key = select_ids[i];  storage[key] = document.getElementById(key).value
+        }
+        localStorage.setItem("location", JSON.stringify(storage))
+    },
+    recurisveSelect: function(result, keys) {
+        var key = keys.shift();
+        if(key != null) {
+            var value = result[key];
+            var elem = document.getElementById(key);
+            console.log(" " + key + " <= " + value);
+            var timeout = 0;
+            if(value != "" && elem.value != value) {
+                elem.value =  value;
+                elem.dispatchEvent(new Event('change'));
+                timeout = 1000;
+            }
+            setTimeout(function(){ State.recurisveSelect(result, keys) }, timeout);
+        }
+    },
+
+    restore: function() {
+        var json_storage = localStorage.getItem('location');
+        if (json_storage != null){
+            var storage = JSON.parse(json_storage);
+            var keys = Object.keys(storage);
+            State.recurisveSelect(storage, keys);
+        }
+    }
+
+};
+
+
+

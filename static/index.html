@@ -77,6 +77,16 @@
 					<label for="daterange" class="control-label">Date de la mutation</label>
 					<input type="text" id="daterange" name="daterange" value="01-01-2010 - 15-01-2018" class="form-control"/>
 				</div>
+				<div>
+					<a id="stateRestore" onclick="State.restore();" href="#" class="btn btn-primary" style="width: 100%">Restorer l'état sauvé</a>
+					<br/>
+					<br/>
+				</div>
+				<div>
+					<a id="stateSave" onclick="State.save();" href="#" class="btn btn-primary" style="width: 100%">Sauver l'état courant</a>
+					<br/>
+					<br/>
+				</div>
 				<div v-if="section != null">
 					<a v-if="data_section.length > 0" id="exportCSV" onclick="exportCSV(this, data_section, codeCommune + '_' + codeSection + '.csv');" class="btn btn-primary" style="width: 100%">Télécharger les mutations de la section</a>
 					<div v-else class="text-muted">
